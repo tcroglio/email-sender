@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Implantação - Portal Visibilidade</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f6f9;
+      padding: 0;
+      color: #222;
+    }
+
+    .email-wrapper {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      background: #ffffff;
+      border-radius: 0;
+      overflow: hidden;
+      box-shadow: none;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #003082 0%, #0052cc 100%);
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .header-text {
+      text-align: left;
+    }
+
+    .header .eyebrow {
+      font-size: 11px;
+      color: #ffffff;
+      letter-spacing: 1.5px;
+      margin-bottom: 4px;
+    }
+
+    .header h1, h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .header h3 {
+      font-size: 20px;
+      font-weight: 400;
+      color: #ffffff;
+    }
+
+    .header .subtitle {
+      margin-top: 6px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .header-logos {
+      display: inline-flex;
+      align-items: center;
+      align-self: center;
+      justify-content: flex-end;
+      flex-wrap: nowrap;
+      white-space: nowrap;
+      line-height: 0;
+      gap: 12px;
+      margin-left: auto;
+      flex-shrink: 0;
+      margin-top: 20px;
+    }
+
+    .header-logo {
+      width: auto;
+      height: auto;
+      max-height: 52px;
+      display: inline-block;
+      vertical-align: middle;
+      object-fit: contain;
+    }
+
+    .header-logo.primary {
+      width: 120px;
+      max-width: 120px;
+      margin-right: 20px;
+    }
+
+    .header-logo.secondary {
+      width: 95px;
+      max-width: 95px;
+      margin-top: 0;
+    }
+
+    .body {
+      padding: 36px 40px;
+    }
+
+    .intro {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: #444;
+      margin-bottom: 28px;
+    }
+
+    .intro strong {
+      color: #003082;
+    }
+
+    /* ALERTA SLA */
+    .alert-sla {
+      background: #fff8e6;
+      border: 1.5px solid #f5c842;
+      border-left: 5px solid #f5c842;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-bottom: 28px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .alert-sla .icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      margin-right: 20px;
+    }
+
+    .alert-sla-text h4 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #8a6000;
+      margin-bottom: 4px;
+    }
+
+    .alert-sla-text p {
+      font-size: 13px;
+      color: #7a5800;
+      line-height: 1.6;
+    }
+
+    .alert-sla-text strong {
+      color: #5a3e00;
+    }
+
+    .steps-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 18px;
+    }
+
+    .step {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 0;
+      margin-bottom: 16px;
+      align-items: flex-start;
+      position: relative;
+      width: 100%;
+    }
+
+    .step-number {
+      width: 42px;
+      min-width: 42px;
+      max-width: 42px;
+      height: 42px;
+      line-height: 42px;
+      text-align: center;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #003082, #0052cc);
+      color: #fff;
+      font-weight: 700;
+      font-size: 17px;
+      display: inline-block;
+      flex: 0 0 42px;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(0, 82, 204, 0.28);
+      position: relative;
+      z-index: 1;
+      margin-right: 20px;
+    }
+
+    .step-content {
+      border: 1.5px solid #e4ecf7;
+      border-radius: 10px;
+      padding: 16px 18px;
+      flex: 1 1 auto;
+      min-width: 0;
+      width: calc(100% - 82px);
+    }
+
+    .step-content h3 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #003082;
+      margin-bottom: 7px;
+    }
+
+    .step-content p {
+      font-size: 13.5px;
+      color: #555;
+      line-height: 1.65;
+    }
+
+    .step-content p+p {
+      margin-top: 8px;
+    }
+
+    .step-content ul {
+      margin-top: 8px;
+      padding-left: 18px;
+      font-size: 13.5px;
+      color: #555;
+      line-height: 2.1;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-top: 10px;
+      background: #eef3ff;
+      color: #003082;
+      font-size: 11.5px;
+      font-weight: 600;
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+
+    /* BLOCO SEFAZ */
+    .sefaz-box {
+      background: #f0f7ff;
+      border: 1.5px solid #b8d4f5;
+      border-left: 5px solid #0052cc;
+      border-radius: 10px;
+      padding: 16px 18px;
+      margin-top: 10px;
+    }
+
+    .sefaz-box h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #003082;
+      margin-bottom: 6px;
+    }
+
+    .sefaz-box p {
+      font-size: 13px;
+      color: #3a5080;
+      line-height: 1.65;
+    }
+
+    .cnpj-badge {
+      display: inline-block;
+      margin-top: 10px;
+      background: #003082;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 6px;
+      letter-spacing: 1px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .info-box {
+      background: #f7f9fd;
+      border: 1.5px solid #dce6f5;
+      border-radius: 10px;
+      padding: 20px 22px;
+      margin: 28px 0;
+    }
+
+    .info-box h3 {
+      font-size: 12px;
+      font-weight: 700;
+      color: #003082;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 10px;
+      font-size: 13.5px;
+      color: #444;
+      line-height: 1.5;
+    }
+
+    .info-item .dot {
+      min-width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #0052cc;
+      margin-top: 7px;
+      margin-right: 5px;
+    }
+
+    .cta {
+      text-align: center;
+      margin: 28px 0 6px;
+    }
+
+    .cta p {
+      font-size: 13.5px;
+      color: #666;
+      margin-bottom: 16px;
+      line-height: 1.65;
+    }
+
+    .cta a {
+      display: inline-block;
+      background: linear-gradient(135deg, #003082, #0052cc);
+      color: #fff;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 13px 34px;
+      border-radius: 8px;
+      box-shadow: 0 3px 12px rgba(0, 82, 204, 0.3);
+    }
+
+    .test-vars {
+      margin: 26px 0 0;
+      padding: 16px 18px;
+      border: 1px dashed #b8c7e6;
+      border-radius: 10px;
+      background: #f8fbff;
+    }
+
+    .test-vars h4 {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #003082;
+      margin-bottom: 10px;
+    }
+
+    .test-vars p {
+      margin: 0 0 8px;
+      font-size: 13px;
+      color: #3b4a66;
+      line-height: 1.5;
+    }
+
+    .test-vars p:last-child {
+      margin-bottom: 0;
+    }
+
+    .footer {
+      display: flex;
+      background: linear-gradient(135deg, #003082 0%, #0052cc 100%);
+      border-top: 1px solid rgba(255, 255, 255, 0.24);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.88);
+      line-height: 1.5;
+    }
+
+    .footer-col {
+      width: 33.333%;
+      padding: 24px 48px 28px;
+    }
+
+    .footer-col:not(:last-child) {
+      border-right: 1px solid rgba(255, 255, 255, 0.24);
+    }
+
+    .footer-logo {
+      max-width: 150px;
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .footer-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255, 255, 255, 0.72);
+      margin-bottom: 12px;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+    .footer p + p {
+      margin-top: 10px;
+    }
+
+    .footer a {
+      color: #ffffff;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 700px) {
+      .header,
+      .body {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .header-logos {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .header-logo.primary {
+        width: 96px;
+        max-width: 96px;
+      }
+
+      .header-logo.secondary {
+        width: 76px;
+        max-width: 76px;
+      }
+
+      .footer {
+        display: block;
+      }
+
+      .footer-col {
+        width: 100%;
+        padding: 20px;
+      }
+
+      .footer-col:not(:last-child) {
+        border-right: 0;
+        border-bottom: 1px solid #d9d9d9;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="email-wrapper">
+
+    <div class="header">
+      <div class="header-text">
+      <div class="eyebrow">{{ distributor_name }}</div>
+        <h1>IMPLANTAÇÃO - PORTAL VISIBILIDADE</h1>
+        <h3>{{ distributor_name }}</h3>
+        <div class="subtitle">Onboarding do Distribuidor</div>
+      </div>
+      <div class="header-logos">
+        <img class="header-logo primary" src="cid:{{ logo_example_cid }}" alt="Logo">
+      </div>
+    </div>
+
+    <div class="body">
+
+      <p class="intro">
+        Olá parceiro distribuidor! Seja bem-vindo(a) ao processo de implantação do
+        <strong>Portal de Visibilidade e Gestão de Dados</strong>.<br><br>
+        A implantação acontece em <strong>3 etapas simples</strong>. Abaixo explicamos cada uma delas
+        e o que precisaremos de você em cada momento.
+      </p>
+
+      <!-- ALERTA SLA -->
+      <div class="alert-sla">
+        <div class="icon">⏱️</div>
+        <div class="alert-sla-text">
+          <h4>SLA de Resposta: 1 Dia Útil</h4>
+          <p>Foi definido um <strong>cronograma desafiador</strong> para esta implantação. Para que possamos
+            cumpri-lo, precisamos que cada etapa seja respondida em até <strong>1 dia útil</strong> após o recebimento
+            da nossa solicitação. Contamos com a sua agilidade!</p>
+        </div>
+      </div>
+
+      <div class="steps-label">Etapas do processo</div>
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>📋 Validação dos Arquivos</h3>
+          <p>Utilizaremos o <strong>layout de arquivos que você já possui</strong> (vendas, estoque, produtos, clientes
+            e força de vendas) - <strong>sem necessidade de nenhum desenvolvimento adicional</strong> da sua parte.</p>
+          <p>Precisaremos apenas que você nos envie uma amostra dos arquivos para confirmarmos que estão no formato
+            esperado.</p>
+          <span class="tag">✔ Sem novo desenvolvimento</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>🔍 Homologação dos Dados</h3>
+          <p>Processaremos os arquivos e enviaremos por e-mail um relatório com os valores consolidados de
+            <strong>Sell-out (R$)</strong> e <strong>Estoque</strong> para a sua validação.</p>
+          <p>Basta confirmar se os números estão de acordo com a sua realidade. Caso haja divergências, ajustamos antes
+            de ir para produção.</p>
+          <span class="tag">📧 Validação por e-mail</span>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>🔗 Conectividade</h3>
+          <p>Com os dados validados, configuramos a transmissão automática dos arquivos. Oferecemos três opções de
+            integração:</p>
+          <ul>
+            <li><strong>Client EDI (aplicativo leve)</strong> — instalado na sua máquina</li>
+            <li><strong>FTPS</strong> - transferência segura via protocolo criptografado</li>
+            <li><strong>SEFAZ</strong> - integração direta via XML da NF-e</li>
+          </ul>
+
+          <!-- BLOCO SEFAZ -->
+          <div class="sefaz-box">
+            <h4>📄 Integração via SEFAZ</h4>
+            <p>Para ativar esta modalidade, inclua o <strong>CNPJ do integrador</strong> (fornecido pela equipe de
+              implantação) como destinatário no <strong>XML da NF-e</strong>. Dessa forma, os dados seguem diretamente
+              do SEFAZ, sem ação adicional da sua parte no dia a dia.</p>
+            <div class="cnpj-badge">CNPJ: (informado no contato inicial)</div>
+          </div>
+
+          <span class="tag">🔒 Transmissão segura</span>
+        </div>
+      </div>
+
+      <div class="info-box">
+        <h3>📎 O que precisamos de você agora</h3>
+        <div class="info-item">
+          <div class="dot"></div><span>CNPJ(s) da distribuidora</span>
+        </div>
+        <div class="info-item">
+          <div class="dot"></div><span>Nome, e-mail e telefone do responsável pelo <strong>faturamento</strong></span>
+        </div>
+        <div class="info-item">
+          <div class="dot"></div><span>Nome, e-mail e telefone do responsável pela <strong>TI</strong></span>
+        </div>
+        <div class="info-item">
+          <div class="dot"></div><span>Nome, e-mail e telefone do responsável pelo <strong>acompanhamento dos
+              números</strong> no portal</span>
+        </div>
+        <div class="info-item">
+          <div class="dot"></div><span>Amostra dos arquivos de vendas, estoque, produtos, clientes e força de
+            vendas</span>
+        </div>
+      </div>
+
+      <div class="cta">
+        <p>Ficamos no aguardo do retorno. Dúvidas? Nossa equipe está pronta para te apoiar.</p>
+        <a href="mailto:contato@exemplo.com">contato@exemplo.com</a>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="footer-col">
+        <span class="footer-title">logo aqui</span>
+      </div>
+      <div class="footer-col">
+        <p class="footer-title">Localização</p>
+        <p>Av. das Flores, 123 - Sala 321<br>Bairro Fictício | Cidade Fictícia/RS</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-title">Contatos</p>
+        <p><a href="#">Acesse a Central de Atendimentos</a></p>
+        <p>Telefone: <strong>(00) 0000-0000</strong></p>
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

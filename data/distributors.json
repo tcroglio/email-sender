@@ -1,0 +1,11 @@
+[
+  {
+    "distributor_name": "Dist do Vale",
+    "to": [
+      "email-destinatario-1@email.com"
+    ],
+    "cc": [
+      "email-copia-1@email.com"
+    ]
+  }
+]
